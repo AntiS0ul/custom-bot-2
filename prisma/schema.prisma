@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model staffinfos {
+  id        Int      @id @default(autoincrement())
+  username  String?  @db.VarChar(255)
+  discordid Int?
+  rank      String?  @db.VarChar(255)
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model tags {
+  id             Int      @id @default(autoincrement())
+  ingameusername String?  @unique(map: "ingameusername") @db.VarChar(255)
+  discordid      Int?
+  currentrank    String?  @db.VarChar(255)
+  message_count  Int      @default(0)
+  createdAt      DateTime @db.DateTime(0)
+  updatedAt      DateTime @db.DateTime(0)
+}
+
+model userDetails {
+  id        Int      @id @default(autoincrement())
+  name      String?  @db.VarChar(255)
+  rank      String?  @db.VarChar(255)
+  ign       String?  @db.VarChar(255)
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model story {
+  id         String  @id @db.VarChar(20)
+  name       String  @db.Text
+  loversname String  @db.Text
+  help       Boolean
+  food       Boolean
+  flowers    Boolean
+  steal      Boolean
+  howmuch    Int     @default(0)
+  path       Boolean
+  bear       String  @db.Text
+}
